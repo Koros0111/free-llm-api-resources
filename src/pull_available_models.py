@@ -341,93 +341,6 @@ def fetch_hyperbolic_models(logger):
     return sorted(ret_models, key=lambda x: x["name"])
 
 
-def fetch_github_models(logger):
-    logger.info("Fetching GitHub models...")
-    all_models_data = []
-    page = 1
-    total_pages = 1  # Initialize with 1 to start the loop
-
-    while page <= total_pages:
-        try:
-            url = f"https://github.com/marketplace?type=models&page={page}"
-            logger.info(f"Fetching from {url}")
-            r = requests.get(
-                url,
-                headers={
-                    "Accept": "application/json",
-                    "Content-Type": "application/json",
-                    "x-requested-with": "XMLHttpRequest",
-                },
-            )
-            r.raise_for_status()
-            data = r.json()
-
-            current_page_models = data.get("results", [])
-            if not current_page_models:
-                logger.info(f"No models found on page {page}. Stopping.")
-                break
-
-            all_models_data.extend(current_page_models)
-
-            total_pages = data.get("totalPages", 0)
-            logger.info(
-                f"Fetched page {page}/{total_pages}. Found {len(current_page_models)} models on this page."
-            )
-
-            if page >= total_pages:
-                break
-            page += 1
-            time.sleep(0.5)  # Be respectful to the API
-
-        except requests.exceptions.RequestException as e:
-            logger.error(f"Error fetching GitHub models on page {page}: {e}")
-            if (
-                r.status_code == 404 and page == 1
-            ):  # If first page is 404, likely endpoint changed or no models
-                logger.error(
-                    "Initial request failed (404), assuming no models or endpoint issue."
-                )
-                return []
-            elif (
-                r.status_code == 404
-            ):  # If a subsequent page is 404, means we've gone past the last page
-                logger.info(f"Reached end of pages (404 on page {page}).")
-                break
-            # For other errors, break or implement retry logic if desired
-            break
-        except json.JSONDecodeError as e:
-            logger.error(
-                f"Error decoding JSON from GitHub models API on page {page}: {e}"
-            )
-            logger.error(f"Response text: {r.text}")
-            break
-
-    logger.info(
-        f"Fetched a total of {len(all_models_data)} models from GitHub over {page-1 if page > 1 else 1} page(s)."
-    )
-    ret_models = []
-    for model_data in all_models_data:
-        # Ensure model_data is a dictionary and has the required keys
-        if (
-            isinstance(model_data, dict)
-            and "name" in model_data
-            and "friendly_name" in model_data
-        ):
-            ret_models.append(
-                {
-                    "id": model_data[
-                        "name"
-                    ],  # Using 'name' as id, can be changed if another field is more suitable
-                    "name": model_data["friendly_name"],
-                }
-            )
-        else:
-            logger.warning(f"Skipping malformed model data: {model_data}")
-
-    ret_models = sorted(ret_models, key=lambda x: x["name"])
-    return ret_models
-
-
 def fetch_gemini_limits(logger):
     logger.info("Fetching Gemini limits...")
     client = cloudquotas_v1.CloudQuotasClient()
@@ -652,7 +565,6 @@ def main():
     openrouter_logger = create_logger("OpenRouter")
     google_ai_studio_logger = create_logger("Google AI Studio")
     cloudflare_logger = create_logger("Cloudflare")
-    github_logger = create_logger("GitHub")
     hyperbolic_logger = create_logger("Hyperbolic")
     samba_logger = create_logger("SambaNova")
     scaleway_logger = create_logger("Scaleway")
@@ -667,7 +579,6 @@ def main():
                 executor.submit(fetch_openrouter_models, openrouter_logger),
                 executor.submit(fetch_hyperbolic_models, hyperbolic_logger),
                 executor.submit(fetch_cloudflare_models, cloudflare_logger),
-                executor.submit(fetch_github_models, github_logger),
                 executor.submit(fetch_samba_models, samba_logger),
                 executor.submit(fetch_scaleway_models, scaleway_logger),
                 executor.submit(fetch_cohere_models, cohere_logger),
@@ -677,7 +588,6 @@ def main():
                 openrouter_models,
                 hyperbolic_models,
                 cloudflare_models,
-                github_models,
                 samba_models,
                 scaleway_models,
                 cohere_models,
@@ -690,7 +600,6 @@ def main():
         openrouter_models = fetch_openrouter_models(openrouter_logger)
         hyperbolic_models = fetch_hyperbolic_models(hyperbolic_logger)
         cloudflare_models = fetch_cloudflare_models(cloudflare_logger)
-        github_models = fetch_github_models(github_logger)
         samba_models = fetch_samba_models(samba_logger)
         scaleway_models = fetch_scaleway_models(scaleway_logger)
         cohere_models = fetch_cohere_models(cohere_logger)
@@ -913,17 +822,6 @@ def main():
             model_list_markdown += f"- {model['name']}\n"
     else:
         model_list_markdown += "- No chat models available right now.\n"
-    model_list_markdown += "\n"
-
-    # --- GitHub Models ---
-    model_list_markdown += (
-        "### [GitHub Models](https://github.com/marketplace/models)\n\n"
-    )
-    model_list_markdown += "Extremely restrictive input/output token limits.\n\n"
-    model_list_markdown += "**Limits:** [Dependent on Copilot subscription tier (Free/Pro/Pro+/Business/Enterprise)](https://docs.github.com/en/github-models/prototyping-with-ai-models#rate-limits)\n\n"
-    if github_models:
-        for model in github_models:
-            model_list_markdown += f"- {model['name']}\n"
     model_list_markdown += "\n"
 
     # --- Cloudflare Workers AI ---
