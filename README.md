@@ -50,13 +50,10 @@ This lists various services that provide free access or credits towards API-base
 
 Models share a common quota.
 
-- [Hermes 3 Llama 3.1 405B](https://openrouter.ai/nousresearch/hermes-3-llama-3.1-405b:free)
-- [Llama 3.2 3B Instruct](https://openrouter.ai/meta-llama/llama-3.2-3b-instruct:free)
-- [Llama 3.3 70B Instruct](https://openrouter.ai/meta-llama/llama-3.3-70b-instruct:free)
-- [cognitivecomputations/dolphin-mistral-24b-venice-edition:free](https://openrouter.ai/cognitivecomputations/dolphin-mistral-24b-venice-edition:free)
 - [cohere/north-mini-code:free](https://openrouter.ai/cohere/north-mini-code:free)
 - [google/gemma-4-26b-a4b-it:free](https://openrouter.ai/google/gemma-4-26b-a4b-it:free)
 - [google/gemma-4-31b-it:free](https://openrouter.ai/google/gemma-4-31b-it:free)
+- [inclusionai/ling-3.0-flash:free](https://openrouter.ai/inclusionai/ling-3.0-flash:free)
 - [nvidia/nemotron-3-nano-30b-a3b:free](https://openrouter.ai/nvidia/nemotron-3-nano-30b-a3b:free)
 - [nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free](https://openrouter.ai/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free)
 - [nvidia/nemotron-3-super-120b-a12b:free](https://openrouter.ai/nvidia/nemotron-3-super-120b-a12b:free)
@@ -66,18 +63,18 @@ Models share a common quota.
 - [nvidia/nemotron-nano-9b-v2:free](https://openrouter.ai/nvidia/nemotron-nano-9b-v2:free)
 - [openai/gpt-oss-20b:free](https://openrouter.ai/openai/gpt-oss-20b:free)
 - [poolside/laguna-m.1:free](https://openrouter.ai/poolside/laguna-m.1:free)
+- [poolside/laguna-s-2.1:free](https://openrouter.ai/poolside/laguna-s-2.1:free)
 - [poolside/laguna-xs-2.1:free](https://openrouter.ai/poolside/laguna-xs-2.1:free)
-- [qwen/qwen3-coder:free](https://openrouter.ai/qwen/qwen3-coder:free)
-- [qwen/qwen3-next-80b-a3b-instruct:free](https://openrouter.ai/qwen/qwen3-next-80b-a3b-instruct:free)
-- [tencent/hy3:free](https://openrouter.ai/tencent/hy3:free)
 
 ### [Google AI Studio](https://aistudio.google.com)
 
 Data is used for training when used outside of the UK/CH/EEA/EU.
 
 <table><thead><tr><th>Model Name</th><th>Model Limits</th></tr></thead><tbody>
+<tr><td>Gemini 3.6 Flash</td><td>250,000 tokens/minute<br>20 requests/day<br>5 requests/minute</td></tr>
 <tr><td>Gemini 3.5 Flash</td><td>250,000 tokens/minute<br>20 requests/day<br>5 requests/minute</td></tr>
 <tr><td>Gemini 3 Flash</td><td>250,000 tokens/minute<br>20 requests/day<br>5 requests/minute</td></tr>
+<tr><td>Gemini 3.5 Flash-Lite</td><td>250,000 tokens/minute<br>500 requests/day<br>15 requests/minute</td></tr>
 <tr><td>Gemini 3.1 Flash-Lite</td><td>250,000 tokens/minute<br>500 requests/day<br>15 requests/minute</td></tr>
 <tr><td>Gemini 2.5 Flash</td><td>250,000 tokens/minute<br>20 requests/day<br>5 requests/minute</td></tr>
 <tr><td>Gemini 2.5 Flash-Lite</td><td>250,000 tokens/minute<br>20 requests/day<br>10 requests/minute</td></tr>
@@ -85,6 +82,8 @@ Data is used for training when used outside of the UK/CH/EEA/EU.
 <tr><td>Gemini 2.5 Flash TTS</td><td>10,000 tokens/minute<br>10 requests/day<br>3 requests/minute</td></tr>
 <tr><td>Gemini Robotics-ER 1.6</td><td>250,000 tokens/minute<br>20 requests/day<br>5 requests/minute</td></tr>
 <tr><td>Gemini Robotics-ER 1.5</td><td>250,000 tokens/minute<br>20 requests/day<br>10 requests/minute</td></tr>
+<tr><td>Gemma 4 31B Instruct</td><td>16,000 tokens/minute<br>14,400 requests/day<br>30 requests/minute</td></tr>
+<tr><td>Gemma 4 26B A4B Instruct</td><td>16,000 tokens/minute<br>14,400 requests/day<br>30 requests/minute</td></tr>
 <tr><td>Gemma 3 27B Instruct</td><td>15,000 tokens/minute<br>14,400 requests/day<br>30 requests/minute</td></tr>
 <tr><td>Gemma 3 12B Instruct</td><td>15,000 tokens/minute<br>14,400 requests/day<br>30 requests/minute</td></tr>
 <tr><td>Gemma 3 4B Instruct</td><td>15,000 tokens/minute<br>14,400 requests/day<br>30 requests/minute</td></tr>
@@ -105,7 +104,7 @@ Models tend to be context window limited.
 * Free tier (Experiment plan) requires opting into data training
 * Requires phone number verification.
 
-**Limits (per-model):** 1 request/second, 500,000 tokens/minute, 1,000,000,000 tokens/month
+**Limits:** Set per-model and per-organization — check [your limits page](https://admin.mistral.ai/plateforme/limits). As of July 2026 a new free account sees anywhere from 25,000 to 20,000,000 tokens/minute and 0.03 to 12.5 requests/second depending on the model.
 
 - [Open and Proprietary Mistral models](https://docs.mistral.ai/getting-started/models/models_overview/)
 
@@ -131,6 +130,8 @@ HuggingFace Serverless Inference limited to models smaller than 10GB. Some popul
 
 Routes to various supported providers.
 
+The free tier covers a subset of the model catalogue, with per-model rate limits.
+
 **Limits:** [$5/month](https://vercel.com/docs/ai-gateway/pricing)
 
 
@@ -140,15 +141,20 @@ AI gateway with curated models.
 
 Free models may use data for improvement.
 
-- Big Pickle Stealth
-- Nemotron 3 Super Free
+- Big Pickle
 - DeepSeek V4 Flash Free
+- MiMo-V2.5 Free
+- Laguna S 2.1 Free
+- Ling-3.0-flash Free
+- North Mini Code Free
+- Nemotron 3 Ultra Free
 
 ### [Cerebras](https://cloud.cerebras.ai/)
 
 <table><thead><tr><th>Model Name</th><th>Model Limits</th></tr></thead><tbody>
-<tr><td>gpt-oss-120b</td><td>30 requests/minute<br>60,000 tokens/minute<br>900 requests/hour<br>1,000,000 tokens/hour<br>14,400 requests/day<br>1,000,000 tokens/day</td></tr>
-<tr><td>Llama 3.1 8B</td><td>30 requests/minute<br>60,000 tokens/minute<br>900 requests/hour<br>1,000,000 tokens/hour<br>14,400 requests/day<br>1,000,000 tokens/day</td></tr>
+<tr><td>gpt-oss-120b</td><td>5 requests/minute<br>30,000 tokens/minute<br>1,000,000 tokens/hour<br>1,000,000 tokens/day</td></tr>
+<tr><td>zai-glm-4.7</td><td>5 requests/minute<br>30,000 tokens/minute<br>1,000,000 tokens/hour<br>1,000,000 tokens/day</td></tr>
+<tr><td>gemma-4-31b</td><td>5 requests/minute<br>30,000 tokens/minute<br>1,000,000 tokens/hour<br>1,000,000 tokens/day</td></tr>
 </tbody></table>
 
 ### [Groq](https://console.groq.com)
@@ -266,8 +272,6 @@ Extremely restrictive input/output token limits.
 - Qwen 2.5 Coder 32B Instruct
 - Qwen QwQ 32B
 
-</tbody></table>
-
 
 
 ## Providers with trial credits
@@ -318,13 +322,13 @@ Extremely restrictive input/output token limits.
 
 ### [Alibaba Cloud (International) Model Studio](https://bailian.console.alibabacloud.com/)
 
-**Credits:** 1 million tokens/model
+**Credits:** 1 million tokens/model, valid for 90 days (Singapore endpoint only)
 
 **Models:** [Various open and proprietary Qwen models](https://www.alibabacloud.com/en/product/modelstudio)
 
 ### [Modal](https://modal.com)
 
-**Credits:** $5/month upon sign up, $30/month with payment method added
+**Credits:** $30/month on the Starter plan
 
 **Models:** Any supported model - pay by compute time
 
@@ -358,7 +362,7 @@ Extremely restrictive input/output token limits.
 
 ### [Scaleway Generative APIs](https://console.scaleway.com/generative-api/models)
 
-**Credits:** 1,000,000 free tokens
+**Credits:** 1,000,000 free tokens, plus 60 minutes of audio transcription
 
 **Models:**
 - BGE-Multilingual-Gemma2

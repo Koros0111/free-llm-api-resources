@@ -721,9 +721,14 @@ def main():
 
     gemini_text_models = [
         {
-            "id": "gemini-3-5-flash",
+            "id": "gemini-3.6-flash",
+            "name": "Gemini 3.6 Flash",
+            "limits": gemini_models.get("gemini-3.6-flash", {}),
+        },
+        {
+            "id": "gemini-3.5-flash",
             "name": "Gemini 3.5 Flash",
-            "limits": gemini_models.get("gemini-3-flash", {}),
+            "limits": gemini_models.get("gemini-3.5-flash", {}),
         },
         {
             "id": "gemini-3-flash-preview",
@@ -731,7 +736,12 @@ def main():
             "limits": gemini_models.get("gemini-3-flash", {}),
         },
         {
-            "id": "gemini-3.1-flash-lite-preview",
+            "id": "gemini-3.5-flash-lite",
+            "name": "Gemini 3.5 Flash-Lite",
+            "limits": gemini_models.get("gemini-3.5-flash-lite", {}),
+        },
+        {
+            "id": "gemini-3.1-flash-lite",
             "name": "Gemini 3.1 Flash-Lite",
             "limits": gemini_models.get("gemini-3.1-flash-lite", {}),
         },
@@ -764,6 +774,16 @@ def main():
             "id": "gemini-robotics-er-1.5-preview",
             "name": "Gemini Robotics-ER 1.5",
             "limits": gemini_models.get("gemini-robotics-er-1.5-preview", {}),
+        },
+        {
+            "id": "gemma-4-31b-it",
+            "name": "Gemma 4 31B Instruct",
+            "limits": gemini_models.get("gemma-4-31b", {}),
+        },
+        {
+            "id": "gemma-4-26b-a4b-it",
+            "name": "Gemma 4 26B A4B Instruct",
+            "limits": gemini_models.get("gemma-4-26b", {}),
         },
         {
             "id": "gemma-3-27b-it",
@@ -814,7 +834,7 @@ def main():
         "* Free tier (Experiment plan) requires opting into data training\n"
     )
     model_list_markdown += "* Requires phone number verification.\n\n"
-    model_list_markdown += "**Limits (per-model):** 1 request/second, 500,000 tokens/minute, 1,000,000,000 tokens/month\n\n"
+    model_list_markdown += "**Limits:** Set per-model and per-organization — check [your limits page](https://admin.mistral.ai/plateforme/limits). As of July 2026 a new free account sees anywhere from 25,000 to 20,000,000 tokens/minute and 0.03 to 12.5 requests/second depending on the model.\n\n"
     model_list_markdown += "- [Open and Proprietary Mistral models](https://docs.mistral.ai/getting-started/models/models_overview/)\n"
     model_list_markdown += "\n"
 
@@ -839,6 +859,7 @@ def main():
     # --- Vercel AI Gateway ---
     model_list_markdown += "### [Vercel AI Gateway](https://vercel.com/docs/ai-gateway)\n\n"
     model_list_markdown += "Routes to various supported providers.\n\n"
+    model_list_markdown += "The free tier covers a subset of the model catalogue, with per-model rate limits.\n\n"
     model_list_markdown += "**Limits:** [$5/month](https://vercel.com/docs/ai-gateway/pricing)\n\n"
     model_list_markdown += "\n"
 
@@ -846,23 +867,23 @@ def main():
     model_list_markdown += "### [OpenCode Zen](https://opencode.ai/docs/zen/)\n\n"
     model_list_markdown += "AI gateway with curated models.\n\n"
     model_list_markdown += "Free models may use data for improvement.\n\n"
-    model_list_markdown += "- Big Pickle Stealth\n"
-    model_list_markdown += "- Nemotron 3 Super Free\n"
+    model_list_markdown += "- Big Pickle\n"
     model_list_markdown += "- DeepSeek V4 Flash Free\n"
+    model_list_markdown += "- MiMo-V2.5 Free\n"
+    model_list_markdown += "- Laguna S 2.1 Free\n"
+    model_list_markdown += "- Ling-3.0-flash Free\n"
+    model_list_markdown += "- North Mini Code Free\n"
+    model_list_markdown += "- Nemotron 3 Ultra Free\n"
     model_list_markdown += "\n"
 
     # --- Cerebras ---
     model_list_markdown += "### [Cerebras](https://cloud.cerebras.ai/)\n\n"
     model_list_markdown += "<table><thead><tr><th>Model Name</th><th>Model Limits</th></tr></thead><tbody>\n"
+    cerebras_free_limits = "5 requests/minute<br>30,000 tokens/minute<br>1,000,000 tokens/hour<br>1,000,000 tokens/day"
     cerebras_models = [
-        {
-            "name": "gpt-oss-120b",
-            "limits_text": "30 requests/minute<br>60,000 tokens/minute<br>900 requests/hour<br>1,000,000 tokens/hour<br>14,400 requests/day<br>1,000,000 tokens/day"
-        },
-        {
-            "name": "Llama 3.1 8B",
-            "limits_text": "30 requests/minute<br>60,000 tokens/minute<br>900 requests/hour<br>1,000,000 tokens/hour<br>14,400 requests/day<br>1,000,000 tokens/day"
-        },
+        {"name": "gpt-oss-120b", "limits_text": cerebras_free_limits},
+        {"name": "zai-glm-4.7", "limits_text": cerebras_free_limits},
+        {"name": "gemma-4-31b", "limits_text": cerebras_free_limits},
     ]
     for model in cerebras_models:
         model_list_markdown += (
@@ -947,7 +968,8 @@ def main():
             limits_str = get_human_limits(model)
             model_list_markdown += f'<tr><td><a href="https://console.cloud.google.com/vertex-ai/publishers/deepseek-ai/model-garden/{model['urlId']}" target="_blank">{model['name']}</a></td><td>{limits_str}<br>Free during preview</td></tr>\n'
 
-    model_list_markdown += "</tbody></table>\n\n"
+    if vertex_llama_models or vertex_gemini_models or vertex_deepseek_models:
+        model_list_markdown += "</tbody></table>\n\n"
 
     # --- Trial Providers Section Generation ---
     trial_list_markdown = ""
@@ -1006,14 +1028,14 @@ def main():
         {
             "name": "Alibaba Cloud (International) Model Studio",
             "url": "https://bailian.console.alibabacloud.com/",
-            "credits": "1 million tokens/model",
+            "credits": "1 million tokens/model, valid for 90 days (Singapore endpoint only)",
             "requirements": "",
             "models_desc": "[Various open and proprietary Qwen models](https://www.alibabacloud.com/en/product/modelstudio)",
         },
         {
             "name": "Modal",
             "url": "https://modal.com",
-            "credits": "$5/month upon sign up, $30/month with payment method added",
+            "credits": "$30/month on the Starter plan",
             "requirements": "",
             "models_desc": "Any supported model - pay by compute time",
         },
@@ -1054,7 +1076,7 @@ def main():
     # --- Scaleway Generative APIs (Trial - Table) ---
     if scaleway_models:
         trial_list_markdown += "### [Scaleway Generative APIs](https://console.scaleway.com/generative-api/models)\n\n"
-        trial_list_markdown += "**Credits:** 1,000,000 free tokens\n\n"
+        trial_list_markdown += "**Credits:** 1,000,000 free tokens, plus 60 minutes of audio transcription\n\n"
         trial_list_markdown += "**Models:**\n"
         for model in scaleway_models:
             trial_list_markdown += f"- {model['name']}\n"
