@@ -262,6 +262,19 @@ MODEL_TO_NAME_MAPPING = {
     "compound-beta-mini": "Groq compound-beta-mini",
     "compound-beta": "Groq compound-beta",
     "shisa-ai/shisa-v2-llama3.3-70b": "Shisa V2 Llama 3.3 70B",
+    "cohere/north-mini-code:free": "Cohere North Mini Code",
+    "inclusionai/ling-3.0-flash:free": "Ling 3.0 Flash",
+    "kilo-auto/free": "Kilo Auto Free (Router)",
+    "kwaipilot/kat-coder-pro-v2.5:free": "Kwaipilot KAT-Coder-Pro V2.5",
+    "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": "NVIDIA Nemotron 3 Nano Omni 30B A3B (Reasoning)",
+    "nvidia/nemotron-3-super-120b-a12b:free": "NVIDIA Nemotron 3 Super 120B A12B",
+    "nvidia/nemotron-3-ultra-550b-a55b:free": "NVIDIA Nemotron 3 Ultra 550B A55B",
+    "nvidia/nemotron-3.5-content-safety:free": "NVIDIA Nemotron 3.5 Content Safety",
+    "openrouter/free": "OpenRouter Free Models (Router)",
+    "poolside/laguna-m.1:free": "Poolside Laguna M.1",
+    "poolside/laguna-s-2.1:free": "Poolside Laguna S 2.1",
+    "poolside/laguna-xs-2.1:free": "Poolside Laguna XS 2.1",
+    "stepfun/step-3.7-flash:free": "StepFun Step 3.7 Flash",
 }
 
 HYPERBOLIC_IGNORED_MODELS = {

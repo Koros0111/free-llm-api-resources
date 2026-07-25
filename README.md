@@ -19,6 +19,7 @@ This lists various services that provide free access or credits towards API-base
   - [Mistral (Codestral)](#mistral-codestral)
   - [HuggingFace Inference Providers](#huggingface-inference-providers)
   - [Vercel AI Gateway](#vercel-ai-gateway)
+  - [Kilo Gateway](#kilo-gateway)
   - [OpenCode Zen](#opencode-zen)
   - [Cerebras](#cerebras)
   - [Groq](#groq)
@@ -49,21 +50,21 @@ This lists various services that provide free access or credits towards API-base
 
 Models share a common quota.
 
-- [cohere/north-mini-code:free](https://openrouter.ai/cohere/north-mini-code:free)
+- [Cohere North Mini Code](https://openrouter.ai/cohere/north-mini-code:free)
+- [Ling 3.0 Flash](https://openrouter.ai/inclusionai/ling-3.0-flash:free)
+- [NVIDIA Nemotron 3 Nano Omni 30B A3B (Reasoning)](https://openrouter.ai/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free)
+- [NVIDIA Nemotron 3 Super 120B A12B](https://openrouter.ai/nvidia/nemotron-3-super-120b-a12b:free)
+- [NVIDIA Nemotron 3 Ultra 550B A55B](https://openrouter.ai/nvidia/nemotron-3-ultra-550b-a55b:free)
+- [NVIDIA Nemotron 3.5 Content Safety](https://openrouter.ai/nvidia/nemotron-3.5-content-safety:free)
+- [Poolside Laguna M.1](https://openrouter.ai/poolside/laguna-m.1:free)
+- [Poolside Laguna S 2.1](https://openrouter.ai/poolside/laguna-s-2.1:free)
+- [Poolside Laguna XS 2.1](https://openrouter.ai/poolside/laguna-xs-2.1:free)
 - [google/gemma-4-26b-a4b-it:free](https://openrouter.ai/google/gemma-4-26b-a4b-it:free)
 - [google/gemma-4-31b-it:free](https://openrouter.ai/google/gemma-4-31b-it:free)
-- [inclusionai/ling-3.0-flash:free](https://openrouter.ai/inclusionai/ling-3.0-flash:free)
 - [nvidia/nemotron-3-nano-30b-a3b:free](https://openrouter.ai/nvidia/nemotron-3-nano-30b-a3b:free)
-- [nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free](https://openrouter.ai/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free)
-- [nvidia/nemotron-3-super-120b-a12b:free](https://openrouter.ai/nvidia/nemotron-3-super-120b-a12b:free)
-- [nvidia/nemotron-3-ultra-550b-a55b:free](https://openrouter.ai/nvidia/nemotron-3-ultra-550b-a55b:free)
-- [nvidia/nemotron-3.5-content-safety:free](https://openrouter.ai/nvidia/nemotron-3.5-content-safety:free)
 - [nvidia/nemotron-nano-12b-v2-vl:free](https://openrouter.ai/nvidia/nemotron-nano-12b-v2-vl:free)
 - [nvidia/nemotron-nano-9b-v2:free](https://openrouter.ai/nvidia/nemotron-nano-9b-v2:free)
 - [openai/gpt-oss-20b:free](https://openrouter.ai/openai/gpt-oss-20b:free)
-- [poolside/laguna-m.1:free](https://openrouter.ai/poolside/laguna-m.1:free)
-- [poolside/laguna-s-2.1:free](https://openrouter.ai/poolside/laguna-s-2.1:free)
-- [poolside/laguna-xs-2.1:free](https://openrouter.ai/poolside/laguna-xs-2.1:free)
 
 ### [Google AI Studio](https://aistudio.google.com)
 
@@ -133,6 +134,28 @@ The free tier covers a subset of the model catalogue, with per-model rate limits
 
 **Limits:** [$5/month](https://vercel.com/docs/ai-gateway/pricing)
 
+
+### [Kilo Gateway](https://kilo.ai/docs/gateway)
+
+OpenAI-compatible gateway routing to various providers. Free models work without an account.
+
+All free models may use your prompts for training.
+
+**Limits:** [200 requests/hour per IP, shared across all free models](https://kilo.ai/docs/gateway/usage-and-billing#rate-limiting)
+
+- Cohere North Mini Code
+- Kilo Auto Free (Router)
+- Kwaipilot KAT-Coder-Pro V2.5
+- Ling 3.0 Flash
+- NVIDIA Nemotron 3 Nano Omni 30B A3B (Reasoning)
+- NVIDIA Nemotron 3 Super 120B A12B
+- NVIDIA Nemotron 3 Ultra 550B A55B
+- NVIDIA Nemotron 3.5 Content Safety
+- OpenRouter Free Models (Router)
+- Poolside Laguna M.1
+- Poolside Laguna S 2.1
+- Poolside Laguna XS 2.1
+- StepFun Step 3.7 Flash
 
 ### [OpenCode Zen](https://opencode.ai/docs/zen/)
 

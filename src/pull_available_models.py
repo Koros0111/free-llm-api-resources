@@ -541,6 +541,33 @@ def get_human_limits(model, seperator="<br>"):
     return seperator.join([f"{value:,} {key}" for key, value in limits.items()])
 
 
+def fetch_kilo_models(logger):
+    logger.info("Fetching Kilo Gateway models...")
+    r = requests.get(
+        "https://api.kilo.ai/api/gateway/models",
+        headers={
+            "Content-Type": "application/json",
+        },
+        timeout=15,
+    )
+    r.raise_for_status()
+    models = r.json()["data"]
+    logger.info(f"Fetched {len(models)} models from Kilo Gateway")
+    ret_models = []
+    for model in models:
+        if not model.get("isFree", False):
+            continue
+        ret_models.append(
+            {
+                "id": model["id"],
+                "name": get_model_name(model["id"]),
+            }
+        )
+    logger.info(f"Found {len(ret_models)} free models from Kilo Gateway")
+    ret_models = sorted(ret_models, key=lambda x: x["name"])
+    return ret_models
+
+
 def generate_toc(markdown):
     toc_lines = []
     # Find all ## and ### headings, but skip the main title (# ...)
@@ -569,6 +596,7 @@ def main():
     samba_logger = create_logger("SambaNova")
     scaleway_logger = create_logger("Scaleway")
     cohere_logger = create_logger("Cohere")
+    kilo_logger = create_logger("Kilo")
 
     fetch_concurrently = os.getenv("FETCH_CONCURRENTLY", "false").lower() == "true"
 
@@ -582,6 +610,7 @@ def main():
                 executor.submit(fetch_samba_models, samba_logger),
                 executor.submit(fetch_scaleway_models, scaleway_logger),
                 executor.submit(fetch_cohere_models, cohere_logger),
+                executor.submit(fetch_kilo_models, kilo_logger),
             ]
             (
                 gemini_models,
@@ -591,6 +620,7 @@ def main():
                 samba_models,
                 scaleway_models,
                 cohere_models,
+                kilo_models,
             ) = [f.result() for f in futures]
 
             # Fetch groq models after others complete
@@ -603,6 +633,7 @@ def main():
         samba_models = fetch_samba_models(samba_logger)
         scaleway_models = fetch_scaleway_models(scaleway_logger)
         cohere_models = fetch_cohere_models(cohere_logger)
+        kilo_models = fetch_kilo_models(kilo_logger)
         groq_models = fetch_groq_models(groq_logger)
 
     # Initialize markdown string for free providers
@@ -770,6 +801,16 @@ def main():
     model_list_markdown += "Routes to various supported providers.\n\n"
     model_list_markdown += "The free tier covers a subset of the model catalogue, with per-model rate limits.\n\n"
     model_list_markdown += "**Limits:** [$5/month](https://vercel.com/docs/ai-gateway/pricing)\n\n"
+    model_list_markdown += "\n"
+
+    # --- Kilo Gateway ---
+    model_list_markdown += "### [Kilo Gateway](https://kilo.ai/docs/gateway)\n\n"
+    model_list_markdown += "OpenAI-compatible gateway routing to various providers. Free models work without an account.\n\n"
+    model_list_markdown += "All free models may use your prompts for training.\n\n"
+    model_list_markdown += "**Limits:** [200 requests/hour per IP, shared across all free models](https://kilo.ai/docs/gateway/usage-and-billing#rate-limiting)\n\n"
+    if kilo_models:
+        for model in kilo_models:
+            model_list_markdown += f"- {model['name']}\n"
     model_list_markdown += "\n"
 
     # --- OpenCode Zen ---
