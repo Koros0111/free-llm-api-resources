@@ -56,7 +56,6 @@ Models share a common quota.
 - [NVIDIA Nemotron 3 Super 120B A12B](https://openrouter.ai/nvidia/nemotron-3-super-120b-a12b:free)
 - [NVIDIA Nemotron 3 Ultra 550B A55B](https://openrouter.ai/nvidia/nemotron-3-ultra-550b-a55b:free)
 - [NVIDIA Nemotron 3.5 Content Safety](https://openrouter.ai/nvidia/nemotron-3.5-content-safety:free)
-- [Poolside Laguna M.1](https://openrouter.ai/poolside/laguna-m.1:free)
 - [Poolside Laguna S 2.1](https://openrouter.ai/poolside/laguna-s-2.1:free)
 - [Poolside Laguna XS 2.1](https://openrouter.ai/poolside/laguna-xs-2.1:free)
 - [google/gemma-4-26b-a4b-it:free](https://openrouter.ai/google/gemma-4-26b-a4b-it:free)
@@ -145,14 +144,12 @@ All free models may use your prompts for training.
 
 - Cohere North Mini Code
 - Kilo Auto Free (Router)
-- Kwaipilot KAT-Coder-Pro V2.5
 - Ling 3.0 Flash
 - NVIDIA Nemotron 3 Nano Omni 30B A3B (Reasoning)
 - NVIDIA Nemotron 3 Super 120B A12B
 - NVIDIA Nemotron 3 Ultra 550B A55B
 - NVIDIA Nemotron 3.5 Content Safety
 - OpenRouter Free Models (Router)
-- Poolside Laguna M.1
 - Poolside Laguna S 2.1
 - Poolside Laguna XS 2.1
 - StepFun Step 3.7 Flash
